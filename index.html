@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Alex Intara's Portfolio</title>
+
+        <meta charset="UTF-8">
+        <meta name="author" content="Alex Intara">
+        <meta name="description" content="Portfolio of Alex's Work">
+        <meta name="viewport" content="width=device-width, initial-scale 1.0">
+        
+        <link rel="stylesheet" type="text/css" href="style.css">
+    </head>
+    <body>
+        <header>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="experiments.html">Experiments</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <main>
+            <section class="intro">
+                <h1 id="about">About Me</h1>
+
+                <p>
+                Hello! I am a 4th year student at UCSD majoring in Computer Engineering. I'm passionate about working with others
+                to develop client-focused solutions, with a particular focus on performance optimizations. My favorite languages are Java and 
+                C++. I'm always eager to learn more and constantly looking to improve my skills.
+                </p>
+
+                <p>
+                Some hobbies of mine include swimming, playing the guitar, tutoring, and learning about things that randomly pique my interest,
+                like emerging hardware technologies or game theory.
+                </p>
+            </section>
+
+            <section class="projects">
+                <h2 id="project1header">Social Compass</h2>
+                <p id="project1">
+                As a group of six, I helped develop a social compass android app using JavaScript. The app allowed users to add their friends or family on the app, letting them
+                see each other on the app on a compass with cardinal directions that moved along with the phone's gyroscope. The app also let them see how far they were from one another.
+                I primarily contributed to the backend algorithms for calculating the distance between the user and landmarks or other people, as well as pulling their locations 
+                from a shared server. I also helped to determine where the visuals representing these people on the screen depending on their relative distances should land.
+                </p>
+                <picture id="project1img">
+                    <source media="(max-width: 767px)" srcset="compass-medium.webp">
+                    <img src="compass.webp" alt="image of a compass">
+                </picture>
+
+                <h2 id="project2header">Barter Assistant</h2>
+                <p id="project2">
+                In a game I frequently play called Black Desert Online, there is a complex bartering system in which you can travel to various places and trade items with 
+                the goal of making profit in the game. Within this system there are many limitations, such as physical distance, obstacles, and limitations on individual trades. 
+                To alleviate this, I designed a script in Python that made use of multiple algorithms I designed and implemented myself to tell the user the items they needed 
+                to stock, the order of the places in which they should travel, and the amounts they needed to trade to make the most sustained income in the least amount of time.
+                </p>
+                <picture id="project2img">
+                    <source media="(max-width: 767px)" srcset="barterpicture-medium.webp">
+                    <img src="barterpicture.webp" alt="image of the game's islands">
+                </picture>
+
+                <h2 id="project3header">Original CPU Architecture</h2>
+                <p id="project3">
+                My two friends and I were tasked with developing an entirely unique CPU architecture, which included specifying our own ISA, designing the 
+                SystemVerilog modules to support those instructions, and writing a Python-based compiler to convert our assembly to machine code. Designed under a 9-bit instruction
+                limit, we heavily refactored and optimized our architecture to perform three specific tasks with our CPU: encrypting of a message using parity bits, decrypting messages
+                of the same format using forward-error correction, and checking if a string is contained in a larger string.
+                </p>
+                <picture id="project3img">
+                    <source media="(max-width: 767px)" srcset="controlflow-medium.webp">
+                    <img src="controlflow.webp" alt="image of the CPU's control flow">
+                </picture>
+            </section>
+
+            <section id="contact">
+                <h2>Ways To Get In Touch</h2>
+                <ul>
+                    <li>Email: aintara@ucsd.edu</li>
+                    <li><a href="https://www.linkedin.com/in/alex-intara-b54b38221">Linkedin</a></li>
+                </ul>
+            </section>
+        </main>
+
+        <footer>
+            <hr>
+            <p>Made by Alex Intara</p>
+        </footer>
+    </body>
+</html>

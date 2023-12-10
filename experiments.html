@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Web Experiments</title>
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta charset="UTF-8">
+        <link rel="stylesheet" type="text/css" href="style.css">
+    </head>
+    <body>
+        <header>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="experiments.html">Experiments</a></li>
+                    <li id="toggleButton">
+                        <input type="checkbox" id="modeSwitch">
+                        <label class="switch" for="modeSwitch">Light Mode</label>
+                    </li>
+                </ul>
+            </nav>
+        </header>
+        <main>
+            <h1>
+                Experiments Page
+            </h1>
+
+            <h2 id="contact">
+                Contact Us
+            </h2>
+
+            <form action="https://httpbin.org/post" method="post" id="form">
+                <label for="name">Name: *</label>
+                <input type="text" id="name" name="name" maxlength="60" required oninvalid="setCustomValidity('Name is a required field')" 
+                oninput="setCustomValidity('')">
+
+                <output for="name" class="error"></output>
+                <output for="name" class="info"></output>
+                
+                <label for="email">Email: *</label>
+                <input type="email" id="email" name="email" maxlength="60" required oninvalid="setCustomValidity('Emails need an @ and a valid domain')" 
+                oninput="setCustomValidity('')">
+
+                <output for="email" class="error"></output>
+                <output for="email" class="info"></output>
+
+                <label for="comments">Comments: *</label>
+                <textarea id="comments" name="comments" maxlength="100" title="Please use typical characters" required
+                oninput="validateAndMask(this, /^[A-Za-z0-9,.?';!' -]*$/, 'You used a character that is not allowed. Use letters, numbers, and basic punctuation in your response')"></textarea>
+                
+                <div id="commentsection">
+                    <output for="comments" class="error"></output>
+                    <output for="comments" class="info">Remaining characters: 100</output>
+                </div>
+
+                <input type="hidden" id="possible_bot" name="possible_bot" value="true">
+                <button type="submit">Submit</button>
+            </form>
+        </main>
+
+        <script src="script.js" defer></script>
+    </body>
+</html>
