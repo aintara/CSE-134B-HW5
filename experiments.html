@@ -56,6 +56,22 @@
                 <input type="hidden" id="possible_bot" name="possible_bot" value="true">
                 <button type="submit">Submit</button>
             </form>
+
+            <rating-widget>
+                <form id="ratingform" action="https://httpbin.org/post" method="POST">
+                    <label for="rating">How satisfied are you?</label>
+                    <input type="hidden" name="question" value="How satisfied are you?">
+                    <input type="hidden" id="sentBy" name="sentBy" value="HTML">
+                    <input type="number" id="rating" name="rating" min="1" max="5" value="0" required>
+                    <button type="submit">Submit</button>
+                </form>
+            </rating-widget>
+
+            <weather-widget>
+                <p>
+                    Current Weather Conditions Unavailable
+                </p>
+            </weather-widget>
         </main>
 
         <script src="script.js" defer></script>

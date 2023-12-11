@@ -79,3 +79,148 @@ document.getElementById('modeSwitch').addEventListener('change', function() {
     let currState = document.body.classList.contains('light-mode');
     localStorage.setItem('isLightMode', currState);
 });
+
+class RatingWidget extends HTMLElement {
+    constructor() {
+        super();
+        this.attachShadow({mode: 'open'});
+        this.render();
+    }
+
+    connectedCallback() {
+        let stars = this.shadowRoot.querySelectorAll('.star');
+        let messageElement = this.shadowRoot.getElementById('returnmsg');
+
+        stars.forEach((star, index) => {
+            star.addEventListener('click', () => this.handleRating(5 - index, messageElement));
+        });
+    }
+
+    handleRating(value, messageElement) {
+        console.log(`Selected rating: ${value}`);
+
+        let form = document.getElementById('ratingform');
+
+        if (value >= 4) {
+            messageElement.textContent = `Thanks for the ${value} star rating!`;
+        }
+
+        else {
+            messageElement.textContent = `Thanks for your feedback of ${value} stars. We'll try to do better!`;
+        }
+
+        let formData = new FormData(form);
+        let headers = new Headers();
+        headers.append('X-Sent-By', 'JS');
+
+        formData.set('rating', value);
+        formData.set('sentBy', 'JS');
+
+        fetch("https://httpbin.org/post", {
+            method: 'POST',
+            headers: headers,
+            body: formData,
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log('Form', data);
+        })
+        .catch(error => {
+            console.error('Error!', error);
+        });
+    }
+
+    render() {
+        this.shadowRoot.innerHTML = `
+        <style>
+
+
+            #starcontainer span:hover {
+                color: yellow;
+            }
+
+            #starcontainer #s1:hover ~ span{
+                color: yellow;
+            }
+
+            #starcontainer #s2:hover ~ span{
+                color: yellow;
+            }
+
+            #starcontainer #s3:hover ~ span{
+                color: yellow;
+            }
+
+            #starcontainer #s4:hover ~ span{
+                color: yellow;
+            }
+
+            #starcontainer #s5:hover ~ span{
+                color: yellow;
+            }
+        </style>
+        <div part="rating-text">Rating Widget</div>
+        <div part="stars" id="starcontainer">
+            <span class="star" id="s1">&#9733;</span>
+            <span class="star" id="s2">&#9733;</span>
+            <span class="star" id="s3">&#9733;</span>
+            <span class="star" id="s4">&#9733;</span>
+            <span class="star" id="s5">&#9733;</span>
+        </div>
+        <div id="returnmsg"></div>
+        `;
+    }
+}
+customElements.define('rating-widget', RatingWidget);
+
+class WeatherWidget extends HTMLElement {
+    constructor() {
+        super();
+        this.attachShadow({mode: 'open'});
+        this.render();
+    }
+
+    connectedCallback() {
+        fetch('https://api.weather.gov/gridpoints/SGX/55,22/forecast', {
+            method: 'GET',
+        })
+        .then(response => response.json())
+        .then(data => {
+            let forecast = data.properties.periods[0].shortForecast;
+            let temp = data.properties.periods[0].temperature;
+            let unit = data.properties.periods[0].temperatureUnit;
+            let icon = "";
+            if (forecast === "Mostly Sunny" || forecast === "Partly Cloudy") {
+                icon = "🌤";
+            }
+            else if (forecast === "Mostly Cloudy" || forecast === "Partly Sunny") {
+                icon = "🌥";
+            }
+            else if (forecast === "Sunny") {
+                icon = "☀";
+            }
+            else if (forecast === "Cloudy") {
+                icon = "☁️";
+            }
+            else {
+                icon = "🌦";
+            }
+
+            let msg = `${icon} ${forecast} ${temp} \u00B0${unit}`;
+            let paragraph = this.shadowRoot.getElementById('weatherinfo');
+            paragraph.textContent = msg;
+        })
+        .catch(error => {
+            console.error('Error occurred');
+        });
+    }
+
+    render() {
+        this.shadowRoot.innerHTML = `
+        <p id="weatherinfo">
+        </p>
+        `
+    }
+}
+
+customElements.define('weather-widget', WeatherWidget);
